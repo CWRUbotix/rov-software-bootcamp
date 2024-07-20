@@ -1,5 +1,3 @@
-from time import sleep
-
 from bootcamp_harness.rclpy.node import Node
 from bootcamp_harness.rclpy.qos import QoSPresetProfiles
 from bootcamp_harness import rclpy

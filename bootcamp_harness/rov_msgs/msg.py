@@ -19,3 +19,10 @@ class PixhawkInstruction:
         self.roll = roll
         self.pitch = pitch
         self.yaw = yaw
+
+    def __str__(self):
+        return (
+            f'forward: {self.forward}, lateral: {self.lateral}, vertical: {self.vertical}, '
+            f'roll: {self.roll}, pitch: {self.pitch}, yaw: {self.yaw}, '
+            f'author: {self.author}'
+        )
