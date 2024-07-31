@@ -1,3 +1,9 @@
+# Media files
+*.mkv
+*.mp4
+*.jpg
+*.png
+
 # VSCode
 .vscode
 
