@@ -1,9 +1,6 @@
-import numpy as np
 from numpy.typing import NDArray
 
-from bootcamp_harness.sensor_msgs.msg import Image
-
-MatLike = NDArray[np.generic]
+from .sensor_msgs.msg import Image
 
 
 class CvBridge:
@@ -11,7 +8,7 @@ class CvBridge:
         pass
 
     def imgmsg_to_cv2(self, frame: Image,
-                      desired_encoding: str = 'passthrough') -> MatLike:
+                      desired_encoding: str = 'passthrough') -> NDArray:
         """
         Convert a sensor_msgs::Image message to an OpenCV :cpp:type:`cv::Mat`.
 

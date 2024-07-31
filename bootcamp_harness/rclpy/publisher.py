@@ -3,7 +3,8 @@ import pickle
 
 import zmq
 
-from bootcamp_harness.rclpy.qos import QoSProfile, QoSPresetProfiles
+from .qos import QoSProfile, QoSPresetProfiles
+from .broker import PUB_SOCKET_URL
 
 MsgType = TypeVar('MsgType')
 
@@ -40,7 +41,7 @@ class Publisher:
 
         context = zmq.Context()
         self.socket = context.socket(zmq.PUB)
-        self.socket.bind("tcp://localhost:5555")
+        self.socket.connect(PUB_SOCKET_URL)
 
         print(f'Publisher connected to topic {topic}')
 
@@ -62,5 +63,4 @@ class Publisher:
             raise TypeError(f'Expected {self.msg_type}, got {type(msg)}')
         
         multipart_msg = [self.topic_bytes, msg_bytes]
-        print(f'Publishing: {multipart_msg}')
         self.socket.send_multipart(multipart_msg)

@@ -6,4 +6,4 @@ MatLike = NDArray[np.generic]
 
 class Image:
     def __init__(self, secret_internal_image: MatLike):
-        self.secret_internal_image = secret_internal_image
+        self.secret_internal_image = secret_internal_image  # OpenCV image

@@ -1,9 +1,9 @@
 from typing import TypeVar, Callable
 import re
 
-from bootcamp_harness.rclpy.qos import QoSProfile
-from bootcamp_harness.rclpy.subscription import Subscription
-from bootcamp_harness.rclpy.publisher import Publisher
+from .qos import QoSProfile
+from .subscription import Subscription
+from .publisher import Publisher
 
 SNAKE_ILLEGAL_CHARS = re.compile(r'[^a-z0-9_]')
 

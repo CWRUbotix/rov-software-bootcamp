@@ -3,10 +3,10 @@ import pickle
 
 import zmq
 
-from bootcamp_harness.rclpy.qos import QoSProfile, QoSPresetProfiles
+from .qos import QoSProfile, QoSPresetProfiles
+from .broker import SUB_SOCKET_URL
 
 MsgType = TypeVar('MsgType')
-# ALLOWED_TOPICS = ('front_cam/image_raw', 'pixhawk_control')
 
 
 class Subscription:
@@ -34,14 +34,14 @@ class Subscription:
             raise ValueError('CWRUbotix tip: your qos_profile should be'
                              'QoSPresetProfiles.DEFAULT.value')
 
-        self.msg_type: MsgType = msg_type
+        self.msg_type = msg_type
         self.topic = topic
-        self.callback: Callable[[MsgType], None] = callback
+        self.callback = callback
         self.qos_profile = qos_profile
 
         context = zmq.Context()
         self.socket = context.socket(zmq.SUB)
-        self.socket.connect("tcp://localhost:5555")
+        self.socket.connect(SUB_SOCKET_URL)
         self.socket.subscribe(topic)
 
         print(f'Subscriber connected to topic {topic}')
@@ -49,8 +49,6 @@ class Subscription:
     def secret_internal_poll(self) -> None:
         # Format: [topic, message], where both indices are "bytes" types
         multipart_packet = self.socket.recv_multipart()
-
-        print(f'Receiving: {multipart_packet}')
 
         if len(multipart_packet) != 2:
             print(f'Subscription on {self.topic} failed to receive message '

@@ -1,6 +1,4 @@
-from time import sleep
-
-from bootcamp_harness.rclpy.node import Node
+from .node import Node
 
 
 class SingleThreadedExecutor:
@@ -18,13 +16,14 @@ class SingleThreadedExecutor:
 
     def spin(self) -> None:
         while True:
+            # Deal with messages as fast as possible
+            # Otherwise zmq keeps queueing them forever and eats ALL your memory
             self.spin_once()
-            sleep(0.1)
 
     def spin_once(self) -> None:
         if not SingleThreadedExecutor._rclpy_initialized:
-            raise RuntimeError('CWRUbotix tip: SingleThreadedExecutor.spin_once'
-                               'was called before rclpy.init.'
+            raise RuntimeError('CWRUbotix tip: SingleThreadedExecutor.spin_once '
+                               'was called before rclpy.init. '
                                'Run rclpy.init first!')
 
         for node in self.nodes:
