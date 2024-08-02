@@ -4,7 +4,7 @@ from bootcamp_harness.rov_msgs.msg import PixhawkInstruction
 from bootcamp_harness import rclpy
 
 
-def subscription_callback(message: PixhawkInstruction):
+def subscription_callback(message: PixhawkInstruction) -> None:
     print(f'[Pixhawk] Received: "{message}"')
 
 

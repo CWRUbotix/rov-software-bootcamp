@@ -1,4 +1,4 @@
-from typing import TypeVar, Callable
+from typing import TypeVar, Callable, Generic
 import pickle
 
 import zmq
@@ -9,10 +9,10 @@ from .broker import SUB_SOCKET_URL
 MsgType = TypeVar('MsgType')
 
 
-class Subscription:
+class Subscription(Generic[MsgType]):
     def __init__(
          self,
-         msg_type: MsgType,
+         msg_type: type[MsgType],
          topic: str,
          callback: Callable[[MsgType], None],
          qos_profile: QoSProfile,

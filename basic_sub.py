@@ -3,7 +3,7 @@ from bootcamp_harness.rclpy.qos import QoSPresetProfiles
 from bootcamp_harness import rclpy
 
 
-def subscription_callback(message: str):
+def subscription_callback(message: str) -> None:
     print(f'Received: "{message}"')
 
 

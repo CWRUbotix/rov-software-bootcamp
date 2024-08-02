@@ -1,4 +1,4 @@
-from typing import TypeVar, Any
+from typing import TypeVar, Generic
 import pickle
 
 import zmq
@@ -9,10 +9,10 @@ from .broker import PUB_SOCKET_URL
 MsgType = TypeVar('MsgType')
 
 
-class Publisher:
+class Publisher(Generic[MsgType]):
     def __init__(
         self,
-        msg_type: MsgType,
+        msg_type: type[MsgType],
         topic: str,
         qos_profile: QoSProfile
     ) -> None:
@@ -45,7 +45,7 @@ class Publisher:
 
         print(f'Publisher connected to topic {topic}')
 
-    def publish(self, msg: Any) -> None:
+    def publish(self, msg: MsgType | bytes) -> None:
         """
         Send a message to the topic for the publisher.
 
@@ -54,7 +54,6 @@ class Publisher:
           of the provided type when the publisher was constructed.
         """
 
-        msg_bytes: bytes
         if isinstance(msg, self.msg_type):  # TODO: why doesn't Mypy like this?
             msg_bytes = pickle.dumps(msg)
         elif isinstance(msg, bytes):

@@ -32,10 +32,10 @@ class Node:
 
     def create_publisher(
         self,
-        msg_type: MsgType,
+        msg_type: type[MsgType],
         topic: str,
         qos_profile: QoSProfile,
-    ) -> Publisher:
+    ) -> Publisher[MsgType]:
         """
         Create a new publisher.
 
@@ -55,11 +55,11 @@ class Node:
 
     def create_subscription(
         self,
-        msg_type: MsgType,
+        msg_type: type[MsgType],
         topic: str,
         callback: Callable[[MsgType], None],
         qos_profile: QoSProfile,
-    ) -> Subscription:
+    ) -> Subscription[MsgType]:
         """
         Create a new subscription.
 
