@@ -4,7 +4,7 @@ from bootcamp_harness.rclpy.node import Node
 from bootcamp_harness.rclpy.qos import QoSPresetProfiles
 from bootcamp_harness import rclpy
 
-if __name__ == '__main__':
+def main():
     rclpy.init()
 
     node = Node('my_publisher_node')
@@ -15,3 +15,6 @@ if __name__ == '__main__':
     while True:
         publisher.publish('test message')
         sleep(1)
+
+if __name__ == '__main__':
+    main()

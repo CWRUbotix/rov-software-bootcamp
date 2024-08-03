@@ -6,13 +6,15 @@ from bootcamp_harness import rclpy
 def subscription_callback(message: str) -> None:
     print(f'Received: "{message}"')
 
-
-if __name__ == '__main__':
+def main():
     rclpy.init()
 
     node = Node('my_subscription_node')
 
-    node.create_subscription(str, 'my_topic', subscription_callback,  # TODO: why doesn't Mypy like this?
+    node.create_subscription(str, 'my_topic', subscription_callback,
                              QoSPresetProfiles.DEFAULT.value)
     
     rclpy.spin(node)
+
+if __name__ == '__main__':
+    main()

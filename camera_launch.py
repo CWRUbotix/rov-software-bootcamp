@@ -7,7 +7,7 @@ from bootcamp_harness.rclpy.qos import QoSPresetProfiles
 from bootcamp_harness.sensor_msgs.msg import Image
 from bootcamp_harness import rclpy
 
-if __name__ == '__main__':
+def main():
     video_capture = cv2.VideoCapture('video.mkv')
 
     rclpy.init()
@@ -24,3 +24,6 @@ if __name__ == '__main__':
         sleep(1 / 30)
     
     video_capture.release()
+
+if __name__ == '__main__':
+    main()

@@ -56,7 +56,7 @@ class Subscription(Generic[MsgType]):
 
         message = pickle.loads(multipart_packet[1])
 
-        if not isinstance(message, self.msg_type):  # TODO: why doesn't Mypy like this?
+        if not isinstance(message, self.msg_type):
             print(f'Subscription on {self.topic} failed to process message '
                   'payload because it was not the correct type')
             return

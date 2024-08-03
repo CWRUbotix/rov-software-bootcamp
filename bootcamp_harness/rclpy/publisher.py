@@ -54,7 +54,7 @@ class Publisher(Generic[MsgType]):
           of the provided type when the publisher was constructed.
         """
 
-        if isinstance(msg, self.msg_type):  # TODO: why doesn't Mypy like this?
+        if isinstance(msg, self.msg_type):
             msg_bytes = pickle.dumps(msg)
         elif isinstance(msg, bytes):
             msg_bytes = msg
