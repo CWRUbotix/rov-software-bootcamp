@@ -12,8 +12,12 @@ def main():
     publisher = node.create_publisher(str, 'my_topic',
                                       QoSPresetProfiles.DEFAULT.value)
 
+    i = 0
     while True:
-        publisher.publish('test message')
+        msg = f'Message {i}'
+        print(f'Publishing "{msg}"')
+        publisher.publish(msg)
+        i += 1
         sleep(1)
 
 if __name__ == '__main__':

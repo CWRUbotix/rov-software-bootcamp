@@ -16,6 +16,8 @@ if __name__ == "__main__":
     pub_socket = context.socket(zmq.XSUB)
     pub_socket.bind(PUB_SOCKET_URL)
 
+    print('[BROKER] Starting proxy')
+
     zmq.proxy(sub_socket, pub_socket)
 
     # We never get here
