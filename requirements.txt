@@ -1,0 +1,6 @@
+numpy==2.0.0
+opencv-python==4.10.0.84
+PyQt6==6.7.1
+PyQt6-Qt6==6.7.2
+PyQt6_sip==13.8.0
+pyzmq==26.0.3
