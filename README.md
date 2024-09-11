@@ -71,4 +71,4 @@ We'll test solutions to this challenge in the pool using the actual robot.
     python3 basic_sub_launch.py
     ```
  - You should see messages being sent in the `basic_pub_launch` terminal, and received in the `basic_sub_launch` terminal.
- - Now take a look at the [Challenge 1 instructions](docs/challenge_1.md) to start the first challenge!
+ - Now take a look at the [Challenge 1 instructions](docs/challenge_1_1.md) to start the first challenge!
