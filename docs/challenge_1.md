@@ -1,4 +1,4 @@
-# Challenge 1
+# Challenge 1 - Part 1: Controlling Thrusters
 ## Making a Basic PyQt GUI
  - Create a new file called `gui.py`
  - The entry point for a Python file is this if statement:
@@ -189,16 +189,19 @@ Now we can connect our button click function to a publisher that will send `Pixh
  - Now we can create a node in our `ButtonPanel` class's `__init__` method. The `Node` constructor take a single string parameter for the node name. It's not super critical, but it's good to make them descriptive.
     ```python
     def __init__(self):
+        super().__init__()
+
         node = Node('pixhawk_publisher')
         ...
  - We want to publish messages, so we'll add a publisher to the node. Publishers take three arguments: a message type, a topic name, and a Quality of Service (QoS) value. We'll use the default QoS and a topic name of `pixhawk_control`. We imported our message type already, `PixhawkInstruction`.
     ```python
     node = Node('pixhawk_publisher')
-    publisher = node.create_publisher(
+    self.pixhawk_publisher = node.create_publisher(
         PixhawkInstruction,
         'pixhawk_control',
         QoSPresetProfiles.DEFAULT.value
     )
+    ```
  - You can take a look at the message definition for `PixhawkInstruction`s in the file `bootcamp_harness/rov_msgs/msg/PixhawkInstruction.msg`. It looks something like this:
     ```msg
     float32 forward
@@ -214,4 +217,45 @@ Now we can connect our button click function to a publisher that will send `Pixh
 
     uint8 author
     ```
-   You don't need to worry about the specifics here too much, but note that there are fields in this message called `forward`, `vertical`, `lateral`, etc., and that these are all floats. There's also an integer `author` field, and constant values for manual, keyboard, and autonomous control.
+   You don't need to worry about the specifics here too much. Just notice that there are fields in this message called `forward`, `vertical`, `lateral`, etc., and that these are all floats. There's also an integer `author` field, and constant values for manual, keyboard, and autonomous control.
+ - In Python, that means we can create a `PixhawkInstruction` like so:
+    ```python
+    PixhawkInstruction(
+        forward=0.5,
+        vertical=-0.25,
+        author=PixhawkInstruction.MANUAL_CONTROL
+    )
+    ```
+   The `author` field is more important in our actual codebase; we'll always use `PixhawkInstruction.MANUAL_CONTROL` for this project. We can assign values to any number of other fields when we create a `PixhawkInstruction`. All of the floating point fields are from -1.0 to 1.0, where the extremes are "full throttle" in that direction.
+ - To test things out, let's publish a `PixhawkInstruction` using our publisher whenever we press a button. In the `on_button_press` function, create and publish a `PixhawkInstruction` object using `self.publisher`.
+    ```python
+    instruction = PixhawkInstruction(
+        ...
+    )
+    self.pixhawk_publisher.publish(instruction)
+    ```
+ - To see the results of publishing these messages, we'll need to run `bootcamp_harness/rclpy/broker.py` (to make our janky pseudo-ROS work) and `mavros_launch.py` (which subscribes to the `pixhawk_control` topic) in addition to our `gui.py`. Run each of these in its own terminal in VSCode:
+    ```python
+    python3 bootcamp_harness/rclpy/broker.py
+    python3 mavros_launch.py
+    python3 gui.py
+    ```
+ - Clicking buttons on your GUI should now cause messages to display in the `mavros_launch.py` terminal. They should show the parameters you included in the `PixhawkInstruction` messages you published.
+ - Now we can modify `on_button_press` to create messages corresponding to each button's direction. We'll stick to a max thruster magnitude of 0.5 to avoid damaging any hardware in the future. I'll give an example with two of the fields filled out, you should continue with the rest (except for roll).
+    ```python
+    value = 0.5 if direction else -0.5
+
+    instruction = PixhawkInstruction(
+        forward=(value if movement_type == MovementType.Forward else 0),
+        vertical=(value if movement_type == MovementType.Vertical else 0),
+        ...
+        author=PixhawkInstruction.MANUAL_CONTROL
+    )
+    ```
+ - Running the broker, mavros, and the GUI again should show that the instructions received by the Pixhawk now depend on which button was pressed.
+
+## Improving the Button Panel
+We just wrote a GUI that can control the robot, but it's not the best. Here are some possible improvements.
+ 1. (definitely do this) There's no way to stop! Make a button that stops the robot by sending a message with 0s for all the directional parameters.
+ 2. (optional) The GUI file has a lot of repeated code. Rewrite the GUI initialization and/or click handler so you don't have to repeat yourself as much.
+ 3. (harder optional - only if you're way ahead or bored) Controlling a robot with buttons is awkward. Write something to control it with another input. Keyboard? PlayStation controller?
