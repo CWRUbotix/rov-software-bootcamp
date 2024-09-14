@@ -8,7 +8,7 @@ from bootcamp_harness.sensor_msgs.msg import Image
 from bootcamp_harness import rclpy
 
 def main():
-    video_capture = cv2.VideoCapture('video.mkv')
+    video_capture = cv2.VideoCapture('front_cam.mp4')
 
     rclpy.init()
 
