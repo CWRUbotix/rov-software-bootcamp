@@ -1,6 +1,6 @@
 # Challenge 1 - Part 1: Controlling Thrusters
 ## Making a Basic PyQt GUI
- - Create a new file called `gui.py`
+ - Create a new file called `gui.py` in the top level folder of this repo.
  - The entry point for a Python file is this if statement:
     ```python
     if __name__ == '__main__':
