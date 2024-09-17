@@ -259,3 +259,6 @@ We just wrote a GUI that can control the robot, but it's not the best. Here are 
  1. (definitely do this) There's no way to stop! Make a button that stops the robot by sending a message with 0s for all the directional parameters.
  2. (optional) The GUI file has a lot of repeated code. Rewrite the GUI initialization and/or click handler so you don't have to repeat yourself as much.
  3. (harder optional - only if you're way ahead or bored) Controlling a robot with buttons is awkward. Write something to control it with another input. Keyboard? PlayStation controller?
+
+## Part 2
+Head over to [part 2](challenge_1_2.md) to continue!
