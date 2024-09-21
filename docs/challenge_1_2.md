@@ -35,7 +35,7 @@ Subscriptions are very computationly heavy, as they are constantly checking whet
     ```
  - Then we'll need to create a method in `ButtonPanel` to handle image frames that arrive over the signal. We'll use a *decorator* to label it as a PyQt slot that accepts an `Image` (see the imports above where we imported the `Image` type).
     ```python
-    class VideoWidget(QWidget):
+    class ButtonPanel(QWidget):
         ...
         @pyqtSlot(Image)
         def handle_frame(self, ros_image: Image) -> None:
@@ -139,3 +139,4 @@ video_frame_label.setPixmap(QPixmap.fromImage(qt_image))
 ## Improvements
  1. Right now we create two nodes: one has a publisher to publish `PixhawkInstruction`s, and the other has a subscription to receive `Image`s. That's inefficient. Create a single node that does both instead of two different nodes.
  2. Our actual robot has two cameras, one facing forward and one facing down. Create a new widget that displays the down cam footage. The topic will be `down_cam/image_raw`, and the frame dimensions will be the same as the front cam. You'll need to run `down_cam.py` in the network to receive the frames. Note that the two videos we have for the different cam streams are slightly different lengths, so don't worry if the down cam freezes about 50 seconds in when the front cam is still going.
+ 3. (Harder) Most of the time, we try to give different widgets different functionality, so one widget might be doing video streaming while a separate widget acts as a button panel. Define two different widget classes (one for the ButtonPanel & one for the videos) and add them to one GUI, rather than putting all the functionality on a single widget class.
