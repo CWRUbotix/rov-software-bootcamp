@@ -89,3 +89,4 @@ Now we can make a mask (an image where each pixel is 0 or 1; sometimes called a 
 
 ## Integrating OpenCV with the GUI
  - To start with, modify your `handle_frame` function to put a box around the biggest red contour in the frame. You should add the box between converting the ROS2 frame to the OpenCV frame and converting the OpenCV frame to the PyQt frame.
+ - Now create another video label. Make `handle_frame` send the unannotated frames to the original label, and the frames with rectangles to the new label.
