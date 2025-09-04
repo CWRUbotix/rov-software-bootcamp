@@ -1,8 +1,8 @@
-float32 forward
-float32 vertical
-float32 lateral
-float32 pitch
+float32 x
+float32 y
+float32 z
 float32 yaw
+float32 pitch
 float32 roll
 
 uint8 MANUAL_CONTROL = 0
