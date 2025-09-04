@@ -204,11 +204,11 @@ Now we can connect our button click function to a publisher that will send `Pixh
     ```
  - You can take a look at the message definition for `PixhawkInstruction`s in the file `bootcamp_harness/rov_msgs/msg/PixhawkInstruction.msg`. It looks something like this:
     ```msg
-    float32 forward
-    float32 vertical
-    float32 lateral
-    float32 pitch
+    float32 x
+    float32 y
+    float32 z
     float32 yaw
+    float32 pitch
     float32 roll
 
     uint8 MANUAL_CONTROL = 0
@@ -217,12 +217,12 @@ Now we can connect our button click function to a publisher that will send `Pixh
 
     uint8 author
     ```
-   You don't need to worry about the specifics here too much. Just notice that there are fields in this message called `forward`, `vertical`, `lateral`, etc., and that these are all floats. There's also an integer `author` field, and constant values for manual, keyboard, and autonomous control.
+   You don't need to worry about the specifics here too much. Just notice that there are fields in this message called `x`, `y`, `lateral`, z., and that these are all floats. There's also an integer `author` field, and constant values for manual, keyboard, and autonomous control.
  - In Python, that means we can create a `PixhawkInstruction` like so:
     ```python
     PixhawkInstruction(
-        forward=0.5,
-        vertical=-0.25,
+        x=0.5,
+        y=-0.25,
         author=PixhawkInstruction.MANUAL_CONTROL
     )
     ```
@@ -246,8 +246,8 @@ Now we can connect our button click function to a publisher that will send `Pixh
     value = 0.5 if direction else -0.5
 
     instruction = PixhawkInstruction(
-        forward=(value if movement_type == MovementType.Forward else 0),
-        vertical=(value if movement_type == MovementType.Vertical else 0),
+        x=(value if movement_type == MovementType.Forward else 0),
+        y=(value if movement_type == MovementType.Vertical else 0),
         ...
         author=PixhawkInstruction.MANUAL_CONTROL
     )
