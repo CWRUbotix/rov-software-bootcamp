@@ -11,7 +11,7 @@ class PixhawkInstruction:
         self.author = author
         self.x = x
         self.y = y
-        self.a = z
+        self.z = z
         self.roll = roll
         self.pitch = pitch
         self.yaw = yaw
