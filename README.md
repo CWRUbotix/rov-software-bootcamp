@@ -58,7 +58,9 @@ We'll test solutions to this challenge in the pool using the actual robot.
     ```bash
     pip install -r requirements.txt
     ```
- - Test your installation by running each of these commands in its own terminal. You can open new terminals by clicking the `+` button on the top right of the VSCode terminal.
+ - Test your installation by running each of these commands in its own terminal. You can open new terminals by clicking the `+` button on the top right of the VSCode terminal. Activate the virtual environment in each terminal before running the following commands.
+
+ Note: throughout this bootcamp, you should activate the virtual environment for every new terminal or else it will say you are missing imports when you run a command.
     ```bash
     python3 bootcamp_harness/rclpy/broker.py
     ```
