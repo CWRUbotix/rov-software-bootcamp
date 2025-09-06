@@ -217,7 +217,7 @@ Now we can connect our button click function to a publisher that will send `Pixh
 
     uint8 author
     ```
-   You don't need to worry about the specifics here too much. Just notice that there are fields in this message called `x`, `y`, `lateral`, z., and that these are all floats. There's also an integer `author` field, and constant values for manual, keyboard, and autonomous control.
+   You don't need to worry about the specifics here too much. Just notice that there are fields in this message called `x`, `y`, `z`, and that these are all floats. There's also an integer `author` field, and constant values for manual, keyboard, and autonomous control.
  - In Python, that means we can create a `PixhawkInstruction` like so:
     ```python
     PixhawkInstruction(
