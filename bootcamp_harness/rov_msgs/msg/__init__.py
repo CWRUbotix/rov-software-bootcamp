@@ -9,9 +9,9 @@ class PixhawkInstruction:
                  author: int | None = None) -> None:
 
         self.author = author
-        self.forward = x
-        self.lateral = y
-        self.vertical = z
+        self.x = x
+        self.y = y
+        self.a = z
         self.roll = roll
         self.pitch = pitch
         self.yaw = yaw
