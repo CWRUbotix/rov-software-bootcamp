@@ -1,6 +1,8 @@
 # Challenge 1 - Part 1: Controlling Thrusters
 ## Making a Basic PyQt GUI
  - Create a new file called `gui.py` in the top level folder of this repo.
+
+ <!-- Kind of confusing to have this line that it seems to me at least that you should copy it in and then under it something that you should replace it with -->
  - The entry point for a Python file is this if statement:
     ```python
     if __name__ == '__main__':
@@ -14,7 +16,7 @@
         main()
     ```
    Note that the `main` function needs to be defined before it is called in the if statement. The `pass` keyword here is telling Python the function doesn't do anything yet.
- - Now we can create an empty window in the `main` function:
+ - Now we can create an empty window in the `main` function. Replace the current main definition with the one below:
     ```python
     def main():
         app = QApplication([])
@@ -30,6 +32,18 @@
     ```
    Now the `QWidget` we created in `main` will be the graphical widget that contains the rest of our GUI.
  - Run the GUI with `python3 gui.py` in the console/terminal. You should see an empty window.
+
+ <!-- Not sure why but I got these warnings and errors, still worked though: libEGL warning: failed to get driver name for fd -1
+
+libEGL warning: MESA-LOADER: failed to retrieve device information
+
+libEGL warning: failed to get driver name for fd -1
+
+MESA: error: ZINK: failed to choose pdev
+libEGL warning: egl: failed to create dri2 screen
+
+also my mouse is huge in this lol
+-->
 
 ## Adding a Button Panel
  - To break things up, we'll define a new class that inherits from `QWidget` to hold all our buttons. Make sure to put it before the `main` function!
@@ -107,7 +121,7 @@ To make our buttons do things, we can connect them to functions.
             forward.clicked.connect(self.on_button_press)
     ```
  - Now whenever you click the button you connected, `Button was pressed!` should appear in the console.
- - We could make a separate version of this function for every button, but that would be a pain. Instead, we'll use a single function for all of our buttons, so they'll need to send a short message to tell our function which button was pressed. I'll create an `Enum` class to represent each type of movement and use a boolean to represent whether that movement was in the "positive" direction, but feel free to use a different data structure.
+ - We could make a separate version of this function for every button, but that would be a pain. Instead, we'll use a single function for all of our buttons, so they'll need to send a short message to tell our function which button was pressed. We can create an `Enum` class to represent each type of movement and use a boolean to represent whether that movement was in the "positive" direction, but feel free to use a different data structure.
     ```python
     from enum import Enum
 
@@ -118,7 +132,7 @@ To make our buttons do things, we can connect them to functions.
         Pitch = 4  # Tilting up/down
         Yaw = 5  # Turning left/right
     ```
- - Now we can modify our function to accept the custom message. I'll write the function to accept a `MovementType` and a boolean to represent direction, so the "move forward" button would correspond with a parameter set of `MovementType.Forward, True`. For now we can just print out what we receive for debugging.
+ - Now we can modify our function to accept the custom message. Wre can write the function to accept a `MovementType` and a boolean to represent direction, so the "move forward" button would correspond with a parameter set of `MovementType.Forward, True`. For now we can just print out what we receive for debugging.
     ```python
     class ButtonPanel(QWidget):
         def __init__(self) -> None:
@@ -128,6 +142,9 @@ To make our buttons do things, we can connect them to functions.
             direction_str = 'positively' if direction else 'negatively'
             print(f'Moving: {movement_type.name} {direction_str}')
     ```
+<!-- say somewhere to remove what we had there before and replace it with the lamda version
+
+don't know if I like using the lamda because I remember being confused by it and people new to coding might be confused by it-->
  - Finally, we can connect each of our buttons' `clicked` signals to the function. We'll need to use a `lambda` function (Python's anonymous function operator) to pass our custom movement type and direction for each button.
     ```python
     class ButtonPanel(QWidget):
@@ -171,6 +188,7 @@ from rclpy.node import Node
 ```
 
 ### Controlling Thrusters
+<!-- isn't this all out of date in reference to our robot? Still makes sense to use it for bootcamp, but probably should say we don't use it anymore -->
 Now we can connect our button click function to a publisher that will send `PixhawkInstruction` messages on the `pixhawk_control` topic. In real life, these are recieved by another ROS node running on the Raspberry Pi inside the robot, which then instructs our Pixhawk flight computer to move the thrusters.
 
  - First, let's import a bunch of different things from `bootcamp_harness.rclpy`:
@@ -195,7 +213,6 @@ Now we can connect our button click function to a publisher that will send `Pixh
         ...
  - We want to publish messages, so we'll add a publisher to the node. Publishers take three arguments: a message type, a topic name, and a Quality of Service (QoS) value. We'll use the default QoS and a topic name of `pixhawk_control`. We imported our message type already, `PixhawkInstruction`.
     ```python
-    node = Node('pixhawk_publisher')
     self.pixhawk_publisher = node.create_publisher(
         PixhawkInstruction,
         'pixhawk_control',
@@ -228,20 +245,23 @@ Now we can connect our button click function to a publisher that will send `Pixh
     ```
    The `author` field is more important in our actual codebase; we'll always use `PixhawkInstruction.MANUAL_CONTROL` for this project. We can assign values to any number of other fields when we create a `PixhawkInstruction`. All of the floating point fields are from -1.0 to 1.0, where the extremes are "full throttle" in that direction.
  - To test things out, let's publish a `PixhawkInstruction` using our publisher whenever we press a button. In the `on_button_press` function, create and publish a `PixhawkInstruction` object using `self.publisher`.
+ <!-- I think we shouldput a pixhawk instruction where to dots are, I know its above, but I forgot that when I was going through it -->
     ```python
     instruction = PixhawkInstruction(
         ...
     )
     self.pixhawk_publisher.publish(instruction)
     ```
- - To see the results of publishing these messages, we'll need to run `bootcamp_harness/rclpy/broker.py` (to make our janky pseudo-ROS work) and `mavros_launch.py` (which subscribes to the `pixhawk_control` topic) in addition to our `gui.py`. Run each of these in its own terminal in VSCode:
+ - To see the results of publishing these messages, we'll need to run `bootcamp_harness/rclpy/broker.py` (to make our janky pseudo-ROS work) and `mavros_launch.py` (which subscribes to the `pixhawk_control` topic) in addition to our `gui.py`. Run each of these in its own terminal in VSCode (make sure your venv is running in all the terminals you use!!):
     ```python
     python3 bootcamp_harness/rclpy/broker.py
     python3 mavros_launch.py
     python3 gui.py
     ```
  - Clicking buttons on your GUI should now cause messages to display in the `mavros_launch.py` terminal. They should show the parameters you included in the `PixhawkInstruction` messages you published.
- - Now we can modify `on_button_press` to create messages corresponding to each button's direction. We'll stick to a max thruster magnitude of 0.5 to avoid damaging any hardware in the future. I'll give an example with two of the fields filled out, you should continue with the rest (except for roll).
+ - Now we can modify `on_button_press` to create messages corresponding to each button's direction. We'll stick to a max thruster magnitude of 0.5 to avoid damaging any hardware in the future. I'll give an example with two of the fields filled out, you should continue with the rest (except for roll) (Note insert something here about z since it isn't obvious that I don't know what yet because I thought z was lateral but it might not be ).
+
+ <!-- When I used the code here, it appeared that y refered to lateral and z refered to vertical, I looked through my code and I don't think I mapped anything wrong, but I could have, if not I guess this changed  -->
     ```python
     value = 0.5 if direction else -0.5
 
