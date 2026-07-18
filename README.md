@@ -7,11 +7,11 @@ This bootcamp introduces the most important libraries we use on CWRUbotix MATE R
  - OpenCV
 
 ## Overview
-Bootcamp includes three challenges. The first two challenges don't require ROS 2 to be installed, and instead use a Python package (called a "test harness") that roughly simulates how ROS works. You'll be able to install the test harness on any operating system. You'll need to install the real ROS 2 at least be the third challenge. While you're working on the first two bootcamp challenges, start figuring out how you'll install ROS using [the instructions in our README](https://github.com/CWRUbotix/rov-25?tab=readme-ov-file#setup). If you have *any* questions about installation or the challenges, ask them in our Discord or during the in-person meetings.
+Bootcamp includes three challenges. The first two challenges don't require ROS 2 to be installed, and instead use a Python package (called a "test harness") that roughly simulates how ROS works. You'll be able to install the test harness on any operating system. You'll need to install the real ROS 2 at least by the third challenge. While you're working on the first two bootcamp challenges, start figuring out how you'll install ROS using [the instructions in our README](https://github.com/CWRUbotix/rov-25?tab=readme-ov-file#setup). If you have *any* questions about installation or the challenges, ask them during the in-person meetings or in the Discord.
 
 ### Challenge 1: Making a PyQt GUI
 For this challenge, you'll use Python and the PyQt package to make a Graphical User Interface.
-It will include buttons which to control the robot's thrusters and a video widget to display the stream from the robot's cameras.
+It will include buttons which control the robot's thrusters and a video widget to display the stream from the robot's cameras.
 Once this challenge is done, we'll test all the solutions using our robot simulation on laptops that have ROS.
 
 ### Challenge 2: Identifying Objects with OpenCV
@@ -27,6 +27,7 @@ We'll test solutions to this challenge in the pool using the actual robot.
 
 
 ## First Step: Setup & Installation
+<!-- do we want to recomend GitHub Desktop anymore?? -->
  - [Make a GitHub account](https://github.com/signup).
  - Set up a Git client. That could be [GitHub Desktop](https://desktop.github.com/download/) (recommended) or the [Git CLI](https://git-scm.com/downloads) (for those with more experience).
  - Give your GitHub username to the software lead so they can add you to the CWRUbotix organization and MATE ROV team.
@@ -36,6 +37,7 @@ We'll test solutions to this challenge in the pool using the actual robot.
     python3 --version
     ```
  - Download and install [Python 3.12.5](https://www.python.org/downloads/) if you don't already have a version of Python 3.12 installed.
+ <!-- explain more?? -->.
  - Clone the [rov-software-bootcamp](https://github.com/CWRUbotix/rov-software-bootcamp) repo using your Git client.
  - Open the `rov-software-bootcamp` repo in VSCode. Go to `View > Terminal` to open a terminal. Create a [virtual environment](https://docs.python.org/3/library/venv.html) called `venv` by running:
     ```bash
