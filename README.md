@@ -37,9 +37,9 @@ We'll test solutions to this challenge in the pool using the actual robot.
     python3 --version
     ```
  - Download and install [Python 3.12.5](https://www.python.org/downloads/) if you don't already have a version of Python 3.12 installed.
- <!-- explain more?? -->.
+ <!-- explain more about how to clone?? -->.
  - Clone the [rov-software-bootcamp](https://github.com/CWRUbotix/rov-software-bootcamp) repo using your Git client.
- - Open the `rov-software-bootcamp` repo in VSCode. Go to `View > Terminal` to open a terminal. Create a [virtual environment](https://docs.python.org/3/library/venv.html) called `venv` by running:
+ - Open the `rov-software-bootcamp` repo in VSCode. Go to `View > Terminal` to open a terminal. Create a [virtual environment](https://docs.python.org/3/library/venv.html). This is just an environment to hold all of your dependencies for this project. You can create a virtual environment called `venv` by running:
     ```bash
     python3 -m venv venv
     ```
@@ -60,8 +60,10 @@ We'll test solutions to this challenge in the pool using the actual robot.
     ```bash
     pip install -r requirements.txt
     ```
- - Test your installation by running each of these commands in its own terminal. You can open new terminals by clicking the `+` button on the top right of the VSCode terminal. Activate the virtual environment in each terminal before running the following commands.
+ - Test your installation by running each of thhe following commands in its own terminal. You can open new terminals by clicking the `+` button on the top right of the VSCode terminal. Activate the virtual environment in each terminal before running the following commands.
+<!-- I got a little confused when reading this, not sure how to fix it though. I think the note tripped me up. I forgot I had to run 3 commands after I read it. It kind of looks like I only have to run 2. maybe put all 3 in the same code box and indent the note? Not sure, but I got confused -->
 
+<!-- Also, different command for linux (python3 bootcamp_harness/rclpy/broker.py ) -->
  Note: throughout this bootcamp, you should activate the virtual environment for every new terminal or else it will say you are missing imports when you run a command.
     ```bash
     python3 bootcamp_harness/rclpy/broker.py
@@ -74,5 +76,5 @@ We'll test solutions to this challenge in the pool using the actual robot.
     ```bash
     python3 basic_sub_launch.py
     ```
- - You should see messages being sent in the `basic_pub_launch` terminal, and received in the `basic_sub_launch` terminal.
+ - You should see messages being sent (published) in the `basic_pub_launch` terminal, and received in the `basic_sub_launch` terminal.
  - Now take a look at the [Challenge 1 instructions](docs/challenge_1_1.md) to start the first challenge!
