@@ -79,17 +79,17 @@ Subscriptions are very computationly heavy, as they are constantly checking whet
 
 Now we'll populate the `handle_frame` function. To convert our frame from a ROS `Image` message to an image we can display with PyQt, we first need to convert it to an OpenCV image (which uses the Numpy type `NDArray`), then convert that OpenCV image to a PyQt `QImage`. Once we have the `QImage` we can display it inside a `QLabel` widget in the GUI.
 
-The next sections will go over the details of implementing these conversions, but they won't explicitly lay out all the code you should write. Your goal is to fill in the `handle_frame` function, and to create any other variables/constants necessary elsewhere in the file. Once you've got something you think will work, test by running the scripts above again.
+The next sections will go over the details of implementing these conversions. The next few sections belong in the `handle_frame` function. Once you've got something you think will work, test by running the scripts above again.
 
 ### ROS Image -> OpenCV Image (NDArray)
 
-To convert from a ROS `Image` to an OpenCV `NDArray`, we'll use `CvBridge`, which is a ROS package specifically for this conversion. We'll need to create a CvBridge like this:
+To convert from a ROS `Image` to an OpenCV `NDArray`, we'll use `CvBridge`, which is a ROS package specifically for this conversion. Create a CvBridge in the `handle_frame` function. We'll create a CvBridge like this:
 ```python
-cv_bridge = CvBridge()
+self.cv_bridge = CvBridge()
 ```
-and use it like this:
+and use it like this in the `handle_frame` function:
 ```python
-cv_image = self.cv_bridge.imgmsg_to_cv2(ros_image, desired_encoding='passthrough')
+self.cv_image = self.cv_bridge.imgmsg_to_cv2(ros_image, desired_encoding='passthrough')
 ```
 
 ### OpenCV Image (NDArray) -> PyQt QImage
@@ -123,18 +123,36 @@ def convert_cv_qt(self, cv_img: NDArray, width: int = 0, height: int = 0) -> QIm
 
 You'll need to copy and paste this function into your code.
 
-For example, for our video frames (which have a width of 890 pixels and a height of 682 pixels) you might define `WIDTH` and `HEIGHT` constants of 890 and 682, then use the function like this:
+For example, for our video frames (which have a width of 890 pixels and a height of 682 pixels) you might define `WIDTH` and `HEIGHT` constants of 890 and 682, then use the function like this in the `handle_frame` function:
 
 ```python
-qt_image: QImage = self.convert_cv_qt(cv_image, WIDTH, HEIGHT)
+        # WIDTH and HEIGHT are 890 and 682 respectively
+        self.qt_image: QImage = self.convert_cv_qt(self.cv_image, 890, 682)
 ```
 
 ### Rendering the QImage to the GUI
-To render a `QImage` to the GUI, we need a `QLabel` widget somewhere on the GUI. If the widget was called `video_frame_label`, then we could display a `QImage` called `qt_image` inside it with:
+To render a `QImage` to the GUI, we need a `QLabel` widget somewhere on the GUI. If the widget was called `video_frame_label`, then in the `handle_frame` function we could display a `QImage` called `qt_image` inside it with:
 
 ```python
-video_frame_label.setPixmap(QPixmap.fromImage(qt_image))
+self.video_frame_label.setPixmap(QPixmap.fromImage(qt_image))
 ```
+Make sure you define video_fram_label with "self" so that it can be used in the GUI part of your code. This should be added to your `handle_frame` function.
+
+### Add it to the GUI
+
+Now that we have all the code to handle the video, let's actually add the `video_frame_label` to the GUI. Add the following code to the GUI section of your solution (if you want it to be similiar to the actual CWRUbotix MATE ROV GUI, put it above your `top_layout`). This code creates a new layout for the video and adds the video to it:
+
+```python
+  # create a layout for the video
+        image_layout = QHBoxLayout()
+        layout.addLayout(image_layout)
+        
+        # create a label for the video
+        self.video_frame_label = QLabel()
+        image_layout.addWidget(self.video_frame_label)
+
+```
+
 
 ## Improvements
  1. Right now we create two nodes: one has a publisher to publish `PixhawkInstruction`s, and the other has a subscription to receive `Image`s. That's inefficient. Create a single node that does both instead of two different nodes.

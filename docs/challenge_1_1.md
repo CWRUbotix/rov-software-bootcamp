@@ -245,7 +245,7 @@ Now we can connect our button click function to a publisher that will send `Pixh
     ```
    The `author` field is more important in our actual codebase; we'll always use `PixhawkInstruction.MANUAL_CONTROL` for this project. We can assign values to any number of other fields when we create a `PixhawkInstruction`. All of the floating point fields are from -1.0 to 1.0, where the extremes are "full throttle" in that direction.
  - To test things out, let's publish a `PixhawkInstruction` using our publisher whenever we press a button. In the `on_button_press` function, create and publish a `PixhawkInstruction` object using `self.publisher`.
- <!-- I think we shouldput a pixhawk instruction where to dots are, I know its above, but I forgot that when I was going through it -->
+ <!-- I think we shouldput a pixhawk instruction where the dots are, I know its above, but I forgot that when I was going through it -->
     ```python
     instruction = PixhawkInstruction(
         ...
