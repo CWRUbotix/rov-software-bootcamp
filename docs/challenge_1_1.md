@@ -99,6 +99,8 @@ also my mouse is huge in this lol
    Again, make sure to import `QPushButton` from `PyQt6.QtWidgets`.
  - Now you should have a panel of buttons that do absolutely nothing. Here's mine:
 
+<!-- Maybe change this image to be buttons with words, the arrows kinda confused me when I did bootcamp-->
+ 
     ![Image of my example button panel](challenge_1_button_panel.png)
 
 ## Click Signals
