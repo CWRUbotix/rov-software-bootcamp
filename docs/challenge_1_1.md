@@ -1,6 +1,7 @@
 # Challenge 1 - Part 1: Controlling Thrusters
 ## Making a Basic PyQt GUI
  - Create a new file called `gui.py` in the top level folder of this repo.
+
  - The entry point for a Python file is this if statement:
     ```python
     if __name__ == '__main__':
@@ -14,7 +15,7 @@
         main()
     ```
    Note that the `main` function needs to be defined before it is called in the if statement. The `pass` keyword here is telling Python the function doesn't do anything yet.
- - Now we can create an empty window in the `main` function:
+ - Now we can create an empty window in the `main` function. Replace the current main definition with the one below:
     ```python
     def main():
         app = QApplication([])
@@ -24,12 +25,13 @@
 
         app.exec()
     ```
-   Remember you'll need to import `QApplication` and `QWidget` at the top of the file:
+   You'll need to import `QApplication` and `QWidget` at the top of the file:
     ```python
     from PyQt6.QtWidgets import QApplication, QWidget
     ```
    Now the `QWidget` we created in `main` will be the graphical widget that contains the rest of our GUI.
- - Run the GUI with `python3 gui.py` in the console/terminal. You should see an empty window.
+ - Run the GUI with `python3 gui.py` (`python gui.py` on Windows) in the console/terminal. You should see an empty window.
+
 
 ## Adding a Button Panel
  - To break things up, we'll define a new class that inherits from `QWidget` to hold all our buttons. Make sure to put it before the `main` function!
@@ -79,12 +81,14 @@
             
             ...
 
-            forward = QPushButton('↑')
+            forward = QPushButton('Forward')
             top_layout.addWidget(forward)
     ```
    Again, make sure to import `QPushButton` from `PyQt6.QtWidgets`.
  - Now you should have a panel of buttons that do absolutely nothing. Here's mine:
 
+
+ 
     ![Image of my example button panel](challenge_1_button_panel.png)
 
 ## Click Signals
@@ -107,7 +111,7 @@ To make our buttons do things, we can connect them to functions.
             forward.clicked.connect(self.on_button_press)
     ```
  - Now whenever you click the button you connected, `Button was pressed!` should appear in the console.
- - We could make a separate version of this function for every button, but that would be a pain. Instead, we'll use a single function for all of our buttons, so they'll need to send a short message to tell our function which button was pressed. I'll create an `Enum` class to represent each type of movement and use a boolean to represent whether that movement was in the "positive" direction, but feel free to use a different data structure.
+ - We could make a separate version of this function for every button, but that would be a pain. Instead, we'll use a single function for all of our buttons, so they'll need to send a short message to tell our function which button was pressed. We can create an `Enum` class to represent each type of movement and use a boolean to represent whether that movement was in the "positive" direction, but feel free to use a different data structure.
     ```python
     from enum import Enum
 
@@ -118,7 +122,7 @@ To make our buttons do things, we can connect them to functions.
         Pitch = 4  # Tilting up/down
         Yaw = 5  # Turning left/right
     ```
- - Now we can modify our function to accept the custom message. I'll write the function to accept a `MovementType` and a boolean to represent direction, so the "move forward" button would correspond with a parameter set of `MovementType.Forward, True`. For now we can just print out what we receive for debugging.
+ - Now we can modify our function to accept the custom message. We can write the function to accept a `MovementType` and a boolean to represent direction, so the "move forward" button would correspond with a parameter set of `MovementType.Forward, True`. For now we can just print out what we receive for debugging.
     ```python
     class ButtonPanel(QWidget):
         def __init__(self) -> None:
@@ -128,7 +132,7 @@ To make our buttons do things, we can connect them to functions.
             direction_str = 'positively' if direction else 'negatively'
             print(f'Moving: {movement_type.name} {direction_str}')
     ```
- - Finally, we can connect each of our buttons' `clicked` signals to the function. We'll need to use a `lambda` function (Python's anonymous function operator) to pass our custom movement type and direction for each button.
+- Finally, we can connect each of our buttons' `clicked` signals to the function. Remove the previous connection to the clicked signals and replace it with a `lambda` function. Using a `lambda` function (Python's anonymous function operator) allows us to pass the MovementType and direction to `on_button_press` without needing to define a separate function for each MovementType that is only one line long. The `lambda` keyword tells Python that we want to use the code following it as if that code was inside a function of it's own.
     ```python
     class ButtonPanel(QWidget):
         def __init__(self) -> None:
@@ -144,17 +148,17 @@ To make our buttons do things, we can connect them to functions.
 ### Introduction
 ROS2, or Robot Operating System 2, is a software framework that makes it easy for different processes to communicate with each other in real time. (It's not actually an operating system.) We'll sometimes call ROS2 just ROS because we're lazy, although the old ROS/ROS1 does differ from ROS2 significantly.
 
-There are good tutorials in the [ROS2 docs](https://docs.ros.org/en/jazzy/index.html), but I'll give an intro here. To interact with ROS, we have to create *nodes*. Usually, a node represents one component in the system. We might have one node for reading data from a temperature sensor, or one for controlling our robot's manipulators (claws). To send messages to the rest of the system, a node can create one or more *publishers*. A node can use a publisher to publish messages on a single *topic*. A topic is identified by a string. `arming`, `temperature`, and `front_cam` are all valid topic names. If a publisher publishes a message on a topic, then all nodes that have created *subscribtions* to that topic will receive the message.
+There are good tutorials in the [ROS2 docs](https://docs.ros.org/en/jazzy/index.html), but I'll give an intro here. To interact with ROS, we have to create *nodes*. Usually, a node represents one component in the system. We might have one node for reading data from a temperature sensor, or one for controlling our robot's manipulators (claws). To send messages to the rest of the system, a node can create one or more *publishers*. A node can use a publisher to publish messages on a single *topic*. A topic is identified by a string. `arming`, `temperature`, and `front_cam` are all valid topic names. If a publisher publishes a message on a topic, then all nodes that have created *subscriptions* to that topic will receive the message.
 
 To summarize:
  - Nodes can have multiple publishers (which each can send messages on a single topic) and/or multiple subscriptions (which each subscribe to a single topic).
  - Messages are published and received on topics, which are represented by strings.
- - Any number of publishers and subscriptions can publish/subscribe on a single topic.
+ - Any number of publishers and subscribers can publish/subscribe on a single topic.
 
 ![Diagram of one-to-many and many-to-many relationships between nodes](challenge_1_node_diagram.gif)
 
 ### Context for this bootcamp
-ROS2 has very specific installation requirements. The latest version of ROS works best on the latest version of [Ubuntu](https://ubuntu.com/download), a Linux distro. While you're working on this bootcamp, you should also take a look at our [main codebase readme](https://github.com/CWRUbotix/rov-25?tab=readme-ov-file#table-of-contents) for installation instructions on various operating systems.
+ROS2 has very specific installation requirements. The latest version of ROS works best on the latest version of [Ubuntu](https://ubuntu.com/download), a Linux distro. While you're working on this bootcamp, you should also take a look at our [main codebase readme](https://github.com/CWRUbotix/rov-27?tab=readme-ov-file#table-of-contents) for installation instructions on various operating systems. After bootcamp, you will be picking an installation method, and we will help you get everything set up.
 
 But because it takes a while to install ROS, this bootcamp won't actually use ROS at all. Instead, we'll be using a very experimental "testing harness" (in the `bootcamp_harness` folder of this repo) that should provide almost the same behavior and interface as ROS.
 
@@ -171,7 +175,9 @@ from rclpy.node import Node
 ```
 
 ### Controlling Thrusters
-Now we can connect our button click function to a publisher that will send `PixhawkInstruction` messages on the `pixhawk_control` topic. In real life, these are recieved by another ROS node running on the Raspberry Pi inside the robot, which then instructs our Pixhawk flight computer to move the thrusters.
+The code you will be writing in this bootcamp is actually based on an old method we used to send control messages. However, many of the parts are very similar and sending these messages via ROS will help us connect your GUI to the actual robot, so we decided to leave it as is. This is also a good introduction to ROS publishers and subscribers which we use to communicate between all of the nodes in our codebase. The main difference is that instead of using mavros and sending control messages as ROS messages, which we found caused a significant amount of lag, we now send Mavlink messages to control the thrusters directly. The actual function call has similar parameters, it just sends a different type of message.
+
+Now we can connect our button click function to a publisher that will send `PixhawkInstruction` messages on the `pixhawk_control` topic. In real life, these were received by another ROS node running on the Raspberry Pi inside the robot, which then instructs our Pixhawk flight computer to move the thrusters.
 
  - First, let's import a bunch of different things from `bootcamp_harness.rclpy`:
     ```python
@@ -193,9 +199,8 @@ Now we can connect our button click function to a publisher that will send `Pixh
 
         node = Node('pixhawk_publisher')
         ...
- - We want to publish messages, so we'll add a publisher to the node. Publishers take three arguments: a message type, a topic name, and a Quality of Service (QoS) value. We'll use the default QoS and a topic name of `pixhawk_control`. We imported our message type already, `PixhawkInstruction`.
+ - We want to publish messages, so we'll add a publisher to the node. Publishers take three arguments: a message type, a topic name, and a Quality of Service (QoS) value. We'll use the default QoS and a topic name of `pixhawk_control`. We imported our message type already, `PixhawkInstruction`. Add the following code in the `__init__()` method below your definition of the node.
     ```python
-    node = Node('pixhawk_publisher')
     self.pixhawk_publisher = node.create_publisher(
         PixhawkInstruction,
         'pixhawk_control',
@@ -228,13 +233,16 @@ Now we can connect our button click function to a publisher that will send `Pixh
     ```
    The `author` field is more important in our actual codebase; we'll always use `PixhawkInstruction.MANUAL_CONTROL` for this project. We can assign values to any number of other fields when we create a `PixhawkInstruction`. All of the floating point fields are from -1.0 to 1.0, where the extremes are "full throttle" in that direction.
  - To test things out, let's publish a `PixhawkInstruction` using our publisher whenever we press a button. In the `on_button_press` function, create and publish a `PixhawkInstruction` object using `self.publisher`.
+ 
     ```python
     instruction = PixhawkInstruction(
-        ...
+        x = 0.5,
+        y = -0.25,
+        author = PixhawkInstruction.MANUAL_CONTROL
     )
     self.pixhawk_publisher.publish(instruction)
     ```
- - To see the results of publishing these messages, we'll need to run `bootcamp_harness/rclpy/broker.py` (to make our janky pseudo-ROS work) and `mavros_launch.py` (which subscribes to the `pixhawk_control` topic) in addition to our `gui.py`. Run each of these in its own terminal in VSCode:
+ - To see the results of publishing these messages, we'll need to run `bootcamp_harness/rclpy/broker.py` (to make our janky pseudo-ROS work) and `mavros_launch.py` (which subscribes to the `pixhawk_control` topic) in addition to our `gui.py`. Run each of these in its own terminal in VSCode (make sure your venv is running in all the terminals you use!!):
     ```python
     python3 bootcamp_harness/rclpy/broker.py
     python3 mavros_launch.py
@@ -258,7 +266,11 @@ Now we can connect our button click function to a publisher that will send `Pixh
 We just wrote a GUI that can control the robot, but it's not the best. Here are some possible improvements.
  1. (definitely do this) There's no way to stop! Make a button that stops the robot by sending a message with 0s for all the directional parameters.
  2. (optional) The GUI file has a lot of repeated code. Rewrite the GUI initialization and/or click handler so you don't have to repeat yourself as much.
- 3. (harder optional - only if you're way ahead or bored) Controlling a robot with buttons is awkward. Write something to control it with another input. Keyboard? PlayStation controller?
+1. (definitely do this) There's no way to stop! Make a button that stops the robot by sending a message with 0s for all the directional parameters.
+2. (optional) Needing to press a separate button to stop makes the controls very difficult. Try to make the stop command sent when the button is released. Written in a similar way to `button.clicked.connect(...)`, `button.pressed.connect(...)` calls the function when the button is first pressed down on and `button.released.connect(...)` calls the function when the button is released. Note, if you do this, do not remove the stop button, it is useful to have just in case.
+3. (optional) The GUI file has a lot of repeated code. Rewrite the GUI initialization and/or click handler so you don't have to repeat yourself as much.
+4. (optional) Controlling a robot with buttons is awkward. Write something to control it with another input. Keyboard? PlayStation controller?    
+    - Some suggestions for keyboard control: [PyQt QWindow keyPressEvent function](https://www.riverbankcomputing.com/static/Docs/PyQt6/api/qtgui/qwindow.html#QWindow) or [PyQT QShortcut](https://www.riverbankcomputing.com/static/Docs/PyQt6/api/qtgui/qshortcut.html#QShortcut)
 
 ## Part 2
 Head over to [part 2](challenge_1_2.md) to continue!
