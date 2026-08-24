@@ -81,7 +81,7 @@
             
             ...
 
-            forward = QPushButton('↑')
+            forward = QPushButton('Forward')
             top_layout.addWidget(forward)
     ```
    Again, make sure to import `QPushButton` from `PyQt6.QtWidgets`.
