@@ -35,7 +35,7 @@ We'll test solutions to this challenge in the pool using the actual robot.
     ```bash
     python3 --version
     ```
- - Download and install [Python 3.12.5](https://www.python.org/downloads/) if you don't already have a version of Python 3.12 installed.
+ - Download and install [Python 3.12+](https://www.python.org/downloads/) if you don't already have a version of Python 3.12 or higher installed.
  <!-- explain more about how to clone?? -->.
  - Clone the [rov-software-bootcamp](https://github.com/CWRUbotix/rov-software-bootcamp) repo using your Git client.
  - Open the `rov-software-bootcamp` repo in VSCode. Go to `View > Terminal` to open a terminal. Create a [virtual environment](https://docs.python.org/3/library/venv.html). This is just an environment to hold all of your dependencies for this project. You can create a virtual environment called `venv` by running:
