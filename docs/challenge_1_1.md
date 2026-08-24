@@ -85,7 +85,7 @@
             top_layout.addWidget(forward)
     ```
    Again, make sure to import `QPushButton` from `PyQt6.QtWidgets`.
- - Now you should have a panel of buttons that do absolutely nothing. Here's mine: <!-- Maybe change this image to be buttons with words, the arrows kinda confused me when I did bootcamp-->
+ - Now you should have a panel of buttons that do absolutely nothing. Here's mine:
 
 
  
