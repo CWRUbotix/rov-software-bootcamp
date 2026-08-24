@@ -122,7 +122,7 @@ To make our buttons do things, we can connect them to functions.
         Pitch = 4  # Tilting up/down
         Yaw = 5  # Turning left/right
     ```
- - Now we can modify our function to accept the custom message. Wre can write the function to accept a `MovementType` and a boolean to represent direction, so the "move forward" button would correspond with a parameter set of `MovementType.Forward, True`. For now we can just print out what we receive for debugging.
+ - Now we can modify our function to accept the custom message. We can write the function to accept a `MovementType` and a boolean to represent direction, so the "move forward" button would correspond with a parameter set of `MovementType.Forward, True`. For now we can just print out what we receive for debugging.
     ```python
     class ButtonPanel(QWidget):
         def __init__(self) -> None:
