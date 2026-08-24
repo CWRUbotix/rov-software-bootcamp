@@ -27,9 +27,8 @@ We'll test solutions to this challenge in the pool using the actual robot.
 
 
 ## First Step: Setup & Installation
-<!-- do we want to recomend GitHub Desktop anymore?? -->
- - [Make a GitHub account](https://github.com/signup).
- - Set up a Git client. That could be [GitHub Desktop](https://desktop.github.com/download/) (recommended) or the [Git CLI](https://git-scm.com/downloads) (for those with more experience).
+- [Make a GitHub account](https://github.com/signup).
+- Set up a Git client. That could be [GitHub Desktop](https://desktop.github.com/download/) (simpler to start with) or the [Git CLI](https://git-scm.com/downloads) (a little more complicated to set up, but what you will probably be using after bootcamp).
  - Give your GitHub username to the software lead so they can add you to the CWRUbotix organization and MATE ROV team.
  - Download and install [Visual Studio Code](https://code.visualstudio.com/) (note that *Visual Studio* is a different thing).
  - Check if you already have Python installed by opening your terminal/command prompt/whatever and running:
