@@ -63,9 +63,7 @@ pip install -r requirements.txt
 ```
 
  - Test your installation by running each of thhe following commands in its own terminal. You can open new terminals by clicking the `+` button on the top right of the VSCode terminal. Activate the virtual environment in each terminal before running the following commands.
-<!-- I got a little confused when reading this, not sure how to fix it though. I think the note tripped me up. I forgot I had to run 3 commands after I read it. It kind of looks like I only have to run 2. maybe put all 3 in the same code box and indent the note? Not sure, but I got confused -->
 
-<!-- Also, different command for linux (python3 bootcamp_harness/rclpy/broker.py ) -->
  Note: throughout this bootcamp, you should activate the virtual environment for every new terminal or else it will say you are missing imports when you run a command.
 
 ```bash
