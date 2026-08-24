@@ -2,7 +2,6 @@
 ## Making a Basic PyQt GUI
  - Create a new file called `gui.py` in the top level folder of this repo.
 
- <!-- Kind of confusing to have this line that it seems to me at least that you should copy it in and then under it something that you should replace it with -->
  - The entry point for a Python file is this if statement:
     ```python
     if __name__ == '__main__':
