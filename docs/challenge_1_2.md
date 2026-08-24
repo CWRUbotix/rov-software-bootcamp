@@ -87,9 +87,9 @@ To convert from a ROS `Image` to an OpenCV `NDArray`, we'll use `CvBridge`, whic
 ```python
 self.cv_bridge = CvBridge()
 ```
-and use it like this in the `handle_frame` function:
+and use it like this:
 ```python
-self.cv_image = self.cv_bridge.imgmsg_to_cv2(ros_image, desired_encoding='passthrough')
+cv_image = self.cv_bridge.imgmsg_to_cv2(ros_image, desired_encoding='passthrough')
 ```
 
 ### OpenCV Image (NDArray) -> PyQt QImage
@@ -127,7 +127,7 @@ For example, for our video frames (which have a width of 890 pixels and a height
 
 ```python
         # WIDTH and HEIGHT are 890 and 682 respectively
-        self.qt_image: QImage = self.convert_cv_qt(self.cv_image, 890, 682)
+        qt_image: QImage = self.convert_cv_qt(cv_image, 890, 682)
 ```
 
 ### Rendering the QImage to the GUI
@@ -140,7 +140,7 @@ Make sure you define video_fram_label with "self" so that it can be used in the 
 
 ### Add it to the GUI
 
-Now that we have all the code to handle the video, let's actually add the `video_frame_label` to the GUI. Add the following code to the GUI section of your solution (if you want it to be similiar to the actual CWRUbotix MATE ROV GUI, put it above your `top_layout`). This code creates a new layout for the video and adds the video to it:
+Now that we have all the code to handle the video, let's actually add the `video_frame_label` to the GUI. Add the following code to the ButtonPanel section of your solution (if you want it to look similiar to the actual CWRUbotix MATE ROV GUI, put it above your `top_layout`). This code creates a new layout for the video and adds the video to it:
 
 ```python
   # create a layout for the video
@@ -161,5 +161,5 @@ Now that we have all the code to handle the video, let's actually add the `video
  4. Our actual robot has two cameras, one facing forward and one facing down. Create a new widget that displays the down cam footage. The topic will be `down_cam/image_raw`, and the frame dimensions will be the same as the front cam. You'll need to run `down_cam.py` in the network to receive the frames. You might want to add a parameter to the `init` function of your video frame widget that determines the topic the widget will subscribe to.
 > Note that the two videos we have for the different cam streams are slightly different lengths, so don't worry if the down cam freezes about 50 seconds in when the front cam is still going.
 
-## Challenge 2
+## Optional Challenge 2 (more computer vision)
 Head over to [challenge 2](challenge_2.md) to continue!

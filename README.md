@@ -7,20 +7,20 @@ This bootcamp introduces the most important libraries we use on CWRUbotix MATE R
  - OpenCV
 
 ## Overview
-Bootcamp includes three challenges. The first two challenges don't require ROS 2 to be installed, and instead use a Python package (called a "test harness") that roughly simulates how ROS works. You'll be able to install the test harness on any operating system. You'll need to install the real ROS 2 at least by the third challenge. While you're working on the first two bootcamp challenges, start figuring out how you'll install ROS using [the instructions in our README](https://github.com/CWRUbotix/rov-25?tab=readme-ov-file#setup). If you have *any* questions about installation or the challenges, ask them during the in-person meetings or in the Discord.
+Bootcamp includes three challenges. The first challenge helps you create a way to control the ROV, and the second two challenges are optional and can be done if you are interested in computer vision and autonomous flight. Challenges 1 and 2 don't require ROS 2 to be installed, and instead use a Python package (called a "test harness") that roughly simulates how ROS works. You'll be able to install the test harness on any operating system. You'll need to install the real ROS 2 at least by the third challenge if you decide to complete Challenge 3. While you're working on bootcamp, start deciding how you'll install ROS using [the instructions in our README](https://github.com/CWRUbotix/rov-27?tab=readme-ov-file#setup). After you finish bootcamp, you can install ROS with your chosen installation method. If you have *any* questions about installation or the challenges, ask them during the in-person meetings or in the Discord.
 
 ### Challenge 1: Making a PyQt GUI
 For this challenge, you'll use Python and the PyQt package to make a Graphical User Interface.
 It will include buttons which control the robot's thrusters and a video widget to display the stream from the robot's cameras.
 Once this challenge is done, we'll test all the solutions using our robot simulation on laptops that have ROS.
 
-### Challenge 2: Identifying Objects with OpenCV
+### Optional Challenge 2: Identifying Objects with OpenCV
 For this challenge, you'll use the OpenCV package to identify a red button in the frames of video streamed from the robot's forward camera.
 You'll display an annotated copy of the video on your PyQt GUI as you receive the frames.
 We'll test solutions to this challenge using the simulation as well.
 
 ### Optional Challenge 3: Autonomous Flight
-You should have ROS set up in time for this challenge! Work on [these installation instructions](https://github.com/CWRUbotix/rov-25?tab=readme-ov-file#setup) while you're going through Challenges 1 & 2.
+If you do this challenge, you should have ROS set up. Work on [these installation instructions](https://github.com/CWRUbotix/rov-27?tab=readme-ov-file#setup) while you're going through Challenges 1 & 2.
 
 For this challenge, you need to act on the button position information you gathered in Challenge 2 by driving the robot toward the button. This is an unsolved problem. We tried one possible solution a few years ago, and it sort of worked, but it wasn't consistant enough. If your solution works well, it could end up in the official codebase if the competition runs this challenge again.
 We'll test solutions to this challenge in the pool using the actual robot.
