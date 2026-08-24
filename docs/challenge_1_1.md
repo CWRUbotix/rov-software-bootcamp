@@ -25,7 +25,7 @@
 
         app.exec()
     ```
-   Remember you'll need to import `QApplication` and `QWidget` at the top of the file:
+   You'll need to import `QApplication` and `QWidget` at the top of the file:
     ```python
     from PyQt6.QtWidgets import QApplication, QWidget
     ```
