@@ -19,7 +19,7 @@ For this challenge, you'll use the OpenCV package to identify a red button in th
 You'll display an annotated copy of the video on your PyQt GUI as you receive the frames.
 We'll test solutions to this challenge using the simulation as well.
 
-### Challenge 3: Autonomous Flight
+### Optional Challenge 3: Autonomous Flight
 You should have ROS set up in time for this challenge! Work on [these installation instructions](https://github.com/CWRUbotix/rov-25?tab=readme-ov-file#setup) while you're going through Challenges 1 & 2.
 
 For this challenge, you need to act on the button position information you gathered in Challenge 2 by driving the robot toward the button. This is an unsolved problem. We tried one possible solution a few years ago, and it sort of worked, but it wasn't consistant enough. If your solution works well, it could end up in the official codebase if the competition runs this challenge again.
