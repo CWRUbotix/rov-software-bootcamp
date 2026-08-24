@@ -2,7 +2,6 @@
 ## Making a Basic PyQt GUI
  - Create a new file called `gui.py` in the top level folder of this repo.
 
- <!-- Kind of confusing to have this line that it seems to me at least that you should copy it in and then under it something that you should replace it with -->
  - The entry point for a Python file is this if statement:
     ```python
     if __name__ == '__main__':
@@ -26,24 +25,13 @@
 
         app.exec()
     ```
-   Remember you'll need to import `QApplication` and `QWidget` at the top of the file:
+   You'll need to import `QApplication` and `QWidget` at the top of the file:
     ```python
     from PyQt6.QtWidgets import QApplication, QWidget
     ```
    Now the `QWidget` we created in `main` will be the graphical widget that contains the rest of our GUI.
- - Run the GUI with `python3 gui.py` in the console/terminal. You should see an empty window.
+ - Run the GUI with `python3 gui.py` (`python gui.py` on Windows) in the console/terminal. You should see an empty window.
 
- <!-- Not sure why but I got these warnings and errors, still worked though: libEGL warning: failed to get driver name for fd -1
-
-libEGL warning: MESA-LOADER: failed to retrieve device information
-
-libEGL warning: failed to get driver name for fd -1
-
-MESA: error: ZINK: failed to choose pdev
-libEGL warning: egl: failed to create dri2 screen
-
-also my mouse is huge in this lol
--->
 
 ## Adding a Button Panel
  - To break things up, we'll define a new class that inherits from `QWidget` to hold all our buttons. Make sure to put it before the `main` function!

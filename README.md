@@ -19,7 +19,7 @@ For this challenge, you'll use the OpenCV package to identify a red button in th
 You'll display an annotated copy of the video on your PyQt GUI as you receive the frames.
 We'll test solutions to this challenge using the simulation as well.
 
-### Challenge 3: Autonomous Flight
+### Optional Challenge 3: Autonomous Flight
 You should have ROS set up in time for this challenge! Work on [these installation instructions](https://github.com/CWRUbotix/rov-25?tab=readme-ov-file#setup) while you're going through Challenges 1 & 2.
 
 For this challenge, you need to act on the button position information you gathered in Challenge 2 by driving the robot toward the button. This is an unsolved problem. We tried one possible solution a few years ago, and it sort of worked, but it wasn't consistant enough. If your solution works well, it could end up in the official codebase if the competition runs this challenge again.
@@ -27,18 +27,18 @@ We'll test solutions to this challenge in the pool using the actual robot.
 
 
 ## First Step: Setup & Installation
-<!-- do we want to recomend GitHub Desktop anymore?? -->
- - [Make a GitHub account](https://github.com/signup).
- - Set up a Git client. That could be [GitHub Desktop](https://desktop.github.com/download/) (recommended) or the [Git CLI](https://git-scm.com/downloads) (for those with more experience).
+- [Make a GitHub account](https://github.com/signup).
+- Set up a Git client. That could be [GitHub Desktop](https://desktop.github.com/download/) (simpler to start with) or the [Git CLI](https://git-scm.com/downloads) (a little more complicated to set up, but what you will probably be using after bootcamp).
  - Give your GitHub username to the software lead so they can add you to the CWRUbotix organization and MATE ROV team.
  - Download and install [Visual Studio Code](https://code.visualstudio.com/) (note that *Visual Studio* is a different thing).
  - Check if you already have Python installed by opening your terminal/command prompt/whatever and running:
     ```bash
     python3 --version
     ```
- - Download and install [Python 3.12.5](https://www.python.org/downloads/) if you don't already have a version of Python 3.12 installed.
- <!-- explain more about how to clone?? -->.
- - Clone the [rov-software-bootcamp](https://github.com/CWRUbotix/rov-software-bootcamp) repo using your Git client.
+ - Download and install [Python 3.12+](https://www.python.org/downloads/) if you don't already have a version of Python 3.12 or higher installed.
+- Clone the [rov-software-bootcamp](https://github.com/CWRUbotix/rov-software-bootcamp) repo using your Git client. 
+    - If you are using Github Desktop, go to the repository link, click the big `<> Code` button, click `Open with Github Desktop App`, select where you want it to put the repo on your machine, and click clone. 
+    - If you are using the Git CLI, open your terminal in the folder where you want to clone the repo, and run `git clone git@github.com:CWRUbotix/rov-software-bootcamp.git` (the git@github.com:CWRUbotix/rov-software-bootcamp.git is found by going to the repo, clicking the `<> Code` button, selecting SSH, and copying the link).
  - Open the `rov-software-bootcamp` repo in VSCode. Go to `View > Terminal` to open a terminal. Create a [virtual environment](https://docs.python.org/3/library/venv.html). This is just an environment to hold all of your dependencies for this project. You can create a virtual environment called `venv` by running:
     ```bash
     python3 -m venv venv
