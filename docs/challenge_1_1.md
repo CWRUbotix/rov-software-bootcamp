@@ -32,17 +32,6 @@
    Now the `QWidget` we created in `main` will be the graphical widget that contains the rest of our GUI.
  - Run the GUI with `python3 gui.py` (`python gui.py` on Windows) in the console/terminal. You should see an empty window.
 
- <!-- Not sure why but I got these warnings and errors, still worked though: libEGL warning: failed to get driver name for fd -1
-
-libEGL warning: MESA-LOADER: failed to retrieve device information
-
-libEGL warning: failed to get driver name for fd -1
-
-MESA: error: ZINK: failed to choose pdev
-libEGL warning: egl: failed to create dri2 screen
-
-also my mouse is huge in this lol
--->
 
 ## Adding a Button Panel
  - To break things up, we'll define a new class that inherits from `QWidget` to hold all our buttons. Make sure to put it before the `main` function!
