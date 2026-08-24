@@ -30,7 +30,7 @@
     from PyQt6.QtWidgets import QApplication, QWidget
     ```
    Now the `QWidget` we created in `main` will be the graphical widget that contains the rest of our GUI.
- - Run the GUI with `python3 gui.py` in the console/terminal. You should see an empty window.
+ - Run the GUI with `python3 gui.py` (`python gui.py` on Windows) in the console/terminal. You should see an empty window.
 
  <!-- Not sure why but I got these warnings and errors, still worked though: libEGL warning: failed to get driver name for fd -1
 
